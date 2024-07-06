@@ -20,6 +20,7 @@ const Header = () => {
             <li>TVShows</li>
             <li>Moviess</li>
             <li>Latest</li>
+            <li>Browse</li>
             <li>MyList</li>
             <li>Browse by languages</li>
           </ul>
