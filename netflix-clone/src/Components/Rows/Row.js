@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
  import "./Row.css";
- import axios from "axios";
-//  import movieTrailer from "movieTrailer";
+import axios from '../../utils/axios';
+ import movieTrailer from "movie-trailer";
   import YouTube from "react-youtube";
 
  const Row = ({ title, fetchUrl, isLargeRow }) => {
    const [movies, setMovie] = useState([]);
    const [trailerUrl, setTrailerUrl] = useState("");
+
    const base_url = "http://image.tmdb.org/t/p/original";
 
   useEffect(() => {
@@ -26,17 +27,17 @@ import React, { useEffect, useState } from "react";
      if (trailerUrl) {
       setTrailerUrl("");
     } else {
-    //   movieTrailer(movie?.title || movie?.name || movie?.original_name)
-    //     .then((url) => {
-    //       console.log(url);
-    //       const urlParams = new URLSearchParams(new URL(url).search);
-    //      console.log(urlParams);
-    //       setTrailerUrl(urlParams.get("v"));
-    //      console.log(urlParams.get("v"));
-    //      })
-    //    .catch((error) => {
-    //        console.log("Error:", error)
-    //    })
+      movieTrailer(movie?.title || movie?.name || movie?.original_name)
+        .then((url) => {
+          console.log(url);
+         const urlParams = new URLSearchParams(new URL(url).search);
+        console.log(urlParams);
+          setTrailerUrl(urlParams.get("v"));
+          console.log(urlParams.get("v"));
+         })
+        .catch((error) => {
+            console.log("Error:", error)
+       })
      }
   };
 
@@ -54,7 +55,7 @@ import React, { useEffect, useState } from "react";
       <div className="row_posters">
         {movies?.map((movie, index) => (
           <img
-            // onClick={() => handleClick(movie)}
+             onClick={() => handleClick(movie)}
             key={index}
             src={`${base_url}${
               isLargeRow ? movie.poster_path : movie.backdrop_path
